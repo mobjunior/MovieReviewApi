@@ -6,7 +6,7 @@
 package com.hackathon.simon.Movie_SeriesReviewApi.Utils;
 
 import com.hackathon.simon.Movie_SeriesReviewApi.Entities.Series;
-import java.util.Optional;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -17,5 +17,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(path = "series", collectionResourceRel = "series", itemResourceRel = "series")
 public interface SeriesRepository extends JpaRepository<Series, Long> {
 
-    Optional<Series> findByWatched(Boolean watched);
+    List<Series>  findByWatched(Boolean watched);
 }

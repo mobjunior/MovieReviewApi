@@ -9,12 +9,11 @@ import com.hackathon.simon.Movie_SeriesReviewApi.Entities.Series;
 import com.hackathon.simon.Movie_SeriesReviewApi.Utils.SeriesNotFoundException;
 import com.hackathon.simon.Movie_SeriesReviewApi.Utils.SeriesRepository;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import static org.springframework.http.ResponseEntity.ok;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,8 +41,8 @@ public class SeriesController {
      * @return
      */
     @GetMapping("")
-    public List<Series> getAllSeries() {
-        return repository.findAll();
+    public  ResponseEntity getAllSeries() {
+        return ok(repository.findAll());
     }
 
     /**
@@ -52,8 +51,8 @@ public class SeriesController {
      * @return
      */
     @GetMapping("/watched")
-    public Optional<Series> getWatchedseries() {
-        return repository.findByWatched(Boolean.TRUE);
+    public ResponseEntity getWatchedseries() {
+        return ok(repository.findByWatched(Boolean.TRUE));
     }
 
     /**
@@ -62,8 +61,8 @@ public class SeriesController {
      * @return
      */
     @GetMapping("/unwatched")
-    public Optional<Series> getUnWatchedSeries() {
-        return repository.findByWatched(Boolean.FALSE);
+    public ResponseEntity getUnWatchedSeries() {
+        return ok(repository.findByWatched(Boolean.FALSE));
     }
 
     /**
@@ -88,8 +87,8 @@ public class SeriesController {
      * @return
      */
     @PostMapping("")
-    public Series addSeries(@Valid @RequestBody Series series) {
-        return repository.save(series);
+    public ResponseEntity<Series> addSeries(@Valid @RequestBody Series series) {
+        return ok(repository.save(series));
     }
 
     /**
